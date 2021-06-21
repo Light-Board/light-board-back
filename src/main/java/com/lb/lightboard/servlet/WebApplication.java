@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import com.lb.lightboard.config.SwaggerConfigurer;
 import com.lb.lightboard.config.SwaggerConfig;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -28,11 +29,10 @@ public class WebApplication implements WebApplicationInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		// context.register(PropertyConfig.class);
 		context.register(WebConfig.class);
 		context.register(DBConfig.class);
 		context.register(SwaggerConfig.class);
-
+		context.register(SwaggerConfigurer.class);
 		servletContext.addListener(new ContextLoaderListener(context));
 
 		// Servlet 설정

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.*;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.lb.lightboard.controller")
-public class WebConfig implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer{
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
@@ -23,14 +23,5 @@ public class WebConfig implements WebMvcConfigurer {
 	public void configureViewResolvers(ViewResolverRegistry registry) {
 		// src/main/webapp path가 default로 세팅
 		registry.jsp("/views/", ".jsp");
-	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("swagger-ui.html")
-			.addResourceLocations("classpath:/META-INF/resources/");
-		
-		registry.addResourceHandler("/webjars/**")
-			.addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 }
