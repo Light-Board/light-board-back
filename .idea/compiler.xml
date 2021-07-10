@@ -11,6 +11,6 @@
         <module name="light-board-back.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8" />
+    <bytecodeTargetLevel target="14" />
   </component>
 </project>
