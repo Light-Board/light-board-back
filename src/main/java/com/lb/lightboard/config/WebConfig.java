@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.lb.lightboard.controller")
+@ComponentScan(basePackages = {"com.lb.lightboard.controller", "com.lb.lightboard.bo"})
 public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
