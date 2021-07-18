@@ -6,11 +6,15 @@
  */
 package com.lb.lightboard.model;
 
+<<<<<<< HEAD
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+=======
+import javax.persistence.*;
+>>>>>>> 81ed152f036f7aff43450febfb844cb251e24283
 
 import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
@@ -21,21 +25,35 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "user")
+@Entity
+@Table(name = "user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "user_no")
 	long userNo;
-
+	@Column(name = "user_id")
 	String userId;
+	@Column(name = "password")
 	String password;
-	String method;
+	@Column(name = "password_sort")
+	String passwordSort;
+	@Column(name = "email")
+	String email;
+	@Column(name = "authority")
 	UserAuthorityType userAuthorityType;
+	@Column(name = "created_at")
 	long createAt;
+	@Column(name = "updated_at")
 	long updateAt;
+	@Column(name = "updated_user_no")
 	long updatedUserNo;
+	@Column(name = "updated_detail")
 	String updatedDetail;
+	@Column(name = "status")
 	UserStatusType userStatusType;
+	@Column(name = "reported_cnt")
 	int reportedCnt;
+	@Column(name = "profile_user_no")
 	long profileUserNo;
 }

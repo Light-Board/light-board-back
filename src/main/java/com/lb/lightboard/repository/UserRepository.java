@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 
 import com.lb.lightboard.model.User;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	public boolean findByUserId(String userId);
+	List<User> findByUserId(String userId);
 }
