@@ -6,15 +6,7 @@
  */
 package com.lb.lightboard.model;
 
-<<<<<<< HEAD
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-=======
 import javax.persistence.*;
->>>>>>> 81ed152f036f7aff43450febfb844cb251e24283
 
 import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
