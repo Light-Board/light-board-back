@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="light-board-back.main/Hibernate" uuid="e580b714-d317-4c7d-a786-1957eba03454">
+    <data-source source="LOCAL" name="light_board@localhost" uuid="fd14e8cd-3b48-48b0-9a8d-4517258c5f5f">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/example?serverTimezone=UTC&amp;characterEncoding=UTF-8</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/light_board</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="light_board@104.249.128.241" uuid="a397fce6-07f9-46dc-8eca-3c9503a2a11d">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://104.249.128.241:3306/light_board</jdbc-url>
     </data-source>
   </component>
 </project>
