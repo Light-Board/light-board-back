@@ -6,12 +6,10 @@
  */
 package com.lb.lightboard.controller;
 
+import com.lb.lightboard.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lb.lightboard.bo.UserBO;
 
@@ -29,5 +27,10 @@ public class UserController {
 	@GetMapping(value = "/admin/check")
 	public boolean isExistAdminUser() {
 		return userBO.isExistAdminUser();
+	}
+	
+	@PostMapping
+	public void createUser(@RequestBody User user) {
+		userBO.createUser(user);
 	}
 }

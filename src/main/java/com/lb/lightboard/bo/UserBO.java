@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.lb.lightboard.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,5 +28,11 @@ public class UserBO {
 		List<User> adminUsers = userRepository.findByUserStatusType(UserStatusType.ADMIN);
 		log.debug("admin users : {}", adminUsers);
 		return !adminUsers.isEmpty();
+	}
+	
+	@Transactional
+	public void createUser(User user) {
+		log.debug("Create User : {}", user);
+		userRepository.save(user);
 	}
 }
