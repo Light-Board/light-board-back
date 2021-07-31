@@ -25,4 +25,9 @@ public class UserController {
 	public boolean isDuplicateUserId(@RequestParam(value = "userId") String userId) {
 		return userBO.isDuplicateUserId(userId);
 	}
+	
+	@GetMapping(value = "/admin/check")
+	public boolean isExistAdminUser() {
+		return userBO.isExistAdminUser();
+	}
 }

@@ -7,6 +7,8 @@
 package com.lb.lightboard.bo;
 
 import com.lb.lightboard.model.entity.User;
+import com.lb.lightboard.model.User;
+import com.lb.lightboard.model.type.UserStatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,11 @@ public class UserBO {
 		List<User> users = userRepository.findByUserId(userId);
 		log.debug("users : {}", users);
 		return users.size() > 0;
+	}
+	
+	public boolean isExistAdminUser() {
+		List<User> adminUsers = userRepository.findByUserStatusType(UserStatusType.ADMIN);
+		log.debug("admin users : {}", adminUsers);
+		return !adminUsers.isEmpty();
 	}
 }
