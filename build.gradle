@@ -24,6 +24,7 @@ dependencies {
     implementation 'org.springframework:spring-webmvc:5.3.7'
     implementation 'org.springframework:spring-jdbc:5.3.7'
     implementation 'org.springframework:spring-orm:5.3.7'
+    testImplementation 'org.springframework:spring-test:5.3.7'
 
     // Database
     implementation 'mysql:mysql-connector-java:8.0.21'
