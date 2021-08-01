@@ -1,21 +1,21 @@
-package com.lb.lightboard.model;
+package com.lb.lightboard.model.entity;
 
 import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
 @Table(name = "board_frame")
+//@ToString(exclude = {"orderGroup"}) // stackOverFlow (서로 tostring 하면서 무한 참조 방지) -> 관계 설정 해줄때 참조해야함!
+@Builder // 생성자패턴!
 public class BoardFrame {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "board_frame_id")
 	long boardFrameId;
 	@Column(name = "board_frame_name")
@@ -25,11 +25,11 @@ public class BoardFrame {
 	@Column(name = "access_level")
 	String accessLevel;
 	@Column(name = "created_at")
-	long createAt;
+	LocalDateTime createdAt;
 	@Column(name = "created_user_no")
 	long createdUserNo;
 	@Column(name = "updated_at")
-	long updateAt;
+	LocalDateTime updatedAt;
 	@Column(name = "updated_user_no")
 	long updatedUserNo;
 }

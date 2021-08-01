@@ -8,7 +8,7 @@ package com.lb.lightboard.config;
 
 public class ConfigConstants {
 	public static final String DATASOURCE_DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-	public static final String DATASOURCE_URL = "jdbc:mysql://104.249.128.241:3306/light_board?serverTimezone=UTC";
+	public static final String DATASOURCE_URL = "jdbc:mysql://104.249.128.241:3306/light_board?serverTimezone=UTC&characterEncoding=UTF-8";
 	public static final String DATASOURCE_USER_NAME = "light_board";
 	public static final String DATASOURCE_PASSWORD = "lightboard123!#";
 

@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://104.249.128.241:3306/light_board?serverTimezone=KST&characterEncoding=UTF-8
+    url: jdbc:mysql://104.249.128.241:3306/light_board?serverTimezone=UTC&characterEncoding=UTF-8
     username: light_board
     password: lightboard123!#
     hikari:

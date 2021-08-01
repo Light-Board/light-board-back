@@ -4,7 +4,7 @@
  * Copyright 2021 NAVER Corp. All rights Reserved.
  * NAVER PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
-package com.lb.lightboard.model;
+package com.lb.lightboard.model.entity;
 
 import javax.persistence.*;
 
