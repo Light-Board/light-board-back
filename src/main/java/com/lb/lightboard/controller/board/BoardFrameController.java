@@ -1,7 +1,7 @@
-package com.lb.lightboard.controller.api.board;
+package com.lb.lightboard.controller.board;
 
 import com.lb.lightboard.bo.BoardFrameBO;
-import com.lb.lightboard.controller.api.CrudInterface;
+import com.lb.lightboard.controller.CrudInterface;
 import com.lb.lightboard.model.network.Header;
 import com.lb.lightboard.model.network.request.BoardFrameApiRequest;
 import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Slf4j
 @RestController
-@RequestMapping(value = "/v1/api/board_frame", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/v1/api/board-frame", produces = MediaType.APPLICATION_JSON_VALUE)
 public class BoardFrameController implements CrudInterface<BoardFrameApiRequest, BoardFrameApiResponse> {
 	@Autowired
 	BoardFrameBO boardFrameBO;
@@ -27,7 +25,14 @@ public class BoardFrameController implements CrudInterface<BoardFrameApiRequest,
 	}
 
 	@Override
-	public Header<BoardFrameApiResponse> read(Long id) {
+	@GetMapping("{board-frame-id}")
+	public Header<BoardFrameApiResponse> findById(@PathVariable(name = "board-frame-id") Long id) {
+		log.info("read id: {}", id);
+		return boardFrameBO.findById(id);
+	}
+
+	@Override
+	public Header<BoardFrameApiResponse> findAll() {
 		return null;
 	}
 

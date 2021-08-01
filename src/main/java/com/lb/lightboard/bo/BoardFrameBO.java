@@ -1,6 +1,6 @@
 package com.lb.lightboard.bo;
 
-import com.lb.lightboard.controller.api.CrudInterface;
+import com.lb.lightboard.controller.CrudInterface;
 import com.lb.lightboard.model.entity.BoardFrame;
 import com.lb.lightboard.model.network.Header;
 import com.lb.lightboard.model.network.request.BoardFrameApiRequest;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -54,11 +55,32 @@ public class BoardFrameBO implements CrudInterface<BoardFrameApiRequest, BoardFr
 		BoardFrame newBoardFrame = boardFrameRepository.save(boardFrame);
 
 		// 3. 생성된 데이터 -> boardFrameResponse return
-		return response(newBoardFrame);
+		return response(newBoardFrame, "201", "Success: created one board-frame");
 	}
 
 	@Override
-	public Header<BoardFrameApiResponse> read(Long id) {
+	public Header<BoardFrameApiResponse> findById(Long id) {
+
+		/*
+        // 1. id -> repository getOne or getById
+        Optional<BoardFrame> optional = boardFrameRepository.findById(id);
+
+        // 2. BoardFrame -> boardFrameApiResponse return
+        return optional
+                .map(boardFrame -> response(boardFrame))
+                .orElseGet(() -> Header.ERROR("There is no any data")); // 유저가 없다면! 일로온다!
+        */
+
+		// 위 코드를 람다식으로 더 편하게 바꿀 수 있다.
+		return boardFrameRepository.findById(id)
+				.map(boardFrame -> response(boardFrame, "200", "Success: get one board-frame row finding by id"))
+				.orElseGet(
+						() -> Header.ERROR("There is no any data")
+				);
+	}
+
+	@Override
+	public Header<BoardFrameApiResponse> findAll() {
 		return null;
 	}
 
@@ -73,7 +95,7 @@ public class BoardFrameBO implements CrudInterface<BoardFrameApiRequest, BoardFr
 	}
 
 	// return ApiResponse -> method response
-	private Header<BoardFrameApiResponse> response(BoardFrame boardFrame) {
+	private Header<BoardFrameApiResponse> response(BoardFrame boardFrame, String resultCode, String description) {
 
 		// BoardFrame -> boardFrameApiResponse 만들어줘서 리턴하기
 		BoardFrameApiResponse boardFrameApiResponse = BoardFrameApiResponse.builder()
@@ -87,6 +109,6 @@ public class BoardFrameBO implements CrudInterface<BoardFrameApiRequest, BoardFr
 				.build();
 
 		// Header + data -> return
-		return Header.OK(boardFrameApiResponse);
+		return Header.OK(boardFrameApiResponse, resultCode, description);
 	}
 }
