@@ -9,7 +9,7 @@ package com.lb.lightboard.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.lb.lightboard.model.User;
+import com.lb.lightboard.model.entity.User;
 
 import java.util.List;
 
