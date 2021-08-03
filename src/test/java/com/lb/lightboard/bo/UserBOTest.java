@@ -1,6 +1,6 @@
 package com.lb.lightboard.bo;
 
-import com.lb.lightboard.model.User;
+import com.lb.lightboard.model.entity.User;
 import com.lb.lightboard.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,6 @@
 package com.lb.lightboard.bo;
 
 import com.lb.lightboard.model.entity.User;
-import com.lb.lightboard.model.User;
 import com.lb.lightboard.model.type.UserStatusType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

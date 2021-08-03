@@ -6,7 +6,7 @@
  */
 package com.lb.lightboard.controller;
 
-import com.lb.lightboard.model.User;
+import com.lb.lightboard.model.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
