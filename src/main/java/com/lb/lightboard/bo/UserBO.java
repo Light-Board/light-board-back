@@ -1,9 +1,3 @@
-/*
- * UserBO.java version 2021. 06. 23
- *
- * Copyright 2021 NAVER Corp. All rights Reserved.
- * NAVER PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.lb.lightboard.bo;
 
 import com.lb.lightboard.model.entity.User;
@@ -14,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.lb.lightboard.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,5 +28,11 @@ public class UserBO {
 		List<User> adminUsers = userRepository.findByUserStatusType(UserStatusType.ADMIN);
 		log.debug("admin users : {}", adminUsers);
 		return !adminUsers.isEmpty();
+	}
+	
+	@Transactional
+	public void createUser(User user) {
+		log.debug("Create User : {}", user);
+		userRepository.save(user);
 	}
 }
