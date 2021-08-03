@@ -10,6 +10,7 @@ import javax.persistence.*;
 
 import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
+import com.lb.lightboard.model.type.converter.UserStatusTypeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,7 @@ public class User {
 	long updatedUserNo;
 	@Column(name = "updated_detail")
 	String updatedDetail;
+	@Convert(converter = UserStatusTypeConverter.class)
 	@Column(name = "status")
 	UserStatusType userStatusType;
 	@Column(name = "reported_cnt")
