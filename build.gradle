@@ -55,6 +55,9 @@ dependencies {
     // Jackson + DateType(날짜) 시리얼라이즈 <-> 디시리얼라이즈 문제로 datatype추가
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.4'
+
+    // util
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 test {

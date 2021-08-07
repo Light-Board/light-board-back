@@ -11,16 +11,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-import com.lb.lightboard.config.SwaggerConfigurer;
-import com.lb.lightboard.config.SwaggerConfig;
+import com.lb.lightboard.config.*;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
-
-import com.lb.lightboard.config.DBConfig;
-import com.lb.lightboard.config.WebConfig;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +26,7 @@ public class WebApplication implements WebApplicationInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+		context.register(EnvironmentConfig.class);
 		context.register(WebConfig.class);
 		context.register(DBConfig.class);
 		context.register(SwaggerConfig.class);
