@@ -1,6 +1,7 @@
 package com.lb.lightboard.model.network;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.lb.lightboard.model.network.status.ResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,7 +30,15 @@ public class Header<T> {
 
     // 계속 계속 바뀌는 data부분 -> 제네릭을 사용하자!
     private T data;
-
+    
+    // DATA INFO SETTING
+    public Header(ResponseStatus responseStatus, T data) {
+        this.transactionTime = LocalDateTime.now();
+        this.resultCode = responseStatus.getResult();
+        this.description = responseStatus.getDescription();
+        this.data = data;
+    }
+    
     // DATA OK
     public static <T> Header<T> OK() {
         return (Header<T>) Header.builder()
