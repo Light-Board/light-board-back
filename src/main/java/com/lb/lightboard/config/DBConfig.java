@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
 import org.springframework.context.annotation.Configuration;
@@ -26,15 +27,25 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 @EnableJpaRepositories("com.lb.lightboard.repository")
 @EnableTransactionManagement
 public class DBConfig {
-
+	@Value("${datasource.driver-class-name}")
+	String driverClassName;
+	
+	@Value("${datasource.url}")
+	String url;
+	
+	@Value("${datasource.user}")
+	String user;
+	
+	@Value("${datasource.password}")
+	String password;
+	
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-
-		dataSource.setDriverClassName(ConfigConstants.DATASOURCE_DRIVER_CLASS_NAME);
-		dataSource.setUrl(ConfigConstants.DATASOURCE_URL);
-		dataSource.setUsername(ConfigConstants.DATASOURCE_USER_NAME);
-		dataSource.setPassword(ConfigConstants.DATASOURCE_PASSWORD);
+		dataSource.setDriverClassName(driverClassName);
+		dataSource.setUrl(url);
+		dataSource.setUsername(user);
+		dataSource.setPassword(password);
 		dataSource.setInitialSize(100);
 		dataSource.setMaxIdle(30);
 		dataSource.setMinIdle(20);
