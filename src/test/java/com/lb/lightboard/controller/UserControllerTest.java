@@ -1,5 +1,6 @@
 package com.lb.lightboard.controller;
 
+import com.lb.lightboard.model.network.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,8 @@ public class UserControllerTest extends BaseControllerTest {
 	
 	@Test
 	public void isDuplicatedUserId() {
-		boolean result = userController.isDuplicateUserId("12345");
+		Header<Boolean> result = userController.isDuplicateUserId("12345");
 		
-		Assertions.assertFalse(result);
+		Assertions.assertFalse(result.getData());
 	}
 }

@@ -7,9 +7,11 @@
 package com.lb.lightboard.controller;
 
 import com.lb.lightboard.model.entity.User;
+import com.lb.lightboard.model.network.status.ResponseStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import com.lb.lightboard.model.network.Header;
 
 import com.lb.lightboard.bo.UserBO;
 
@@ -20,13 +22,13 @@ public class UserController {
 	UserBO userBO;
 
 	@GetMapping(params = "userId")
-	public boolean isDuplicateUserId(@RequestParam(value = "userId") String userId) {
-		return userBO.isDuplicateUserId(userId);
+	public Header<Boolean> isDuplicateUserId(@RequestParam(value = "userId") String userId) {
+		return new Header<>(ResponseStatus.BOOLEAN_SUCCESS, userBO.isDuplicateUserId(userId));
 	}
 	
 	@GetMapping(value = "/admin/check")
-	public boolean isExistAdminUser() {
-		return userBO.isExistAdminUser();
+	public Header<Boolean> isExistAdminUser() {
+		return new Header<>(ResponseStatus.BOOLEAN_SUCCESS, userBO.isExistAdminUser());
 	}
 	
 	@PostMapping
