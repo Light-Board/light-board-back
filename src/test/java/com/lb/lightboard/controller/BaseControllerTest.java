@@ -12,4 +12,5 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebConfig.class, DBConfig.class, EnvironmentConfig.class})
 public class BaseControllerTest {
+	//
 }
