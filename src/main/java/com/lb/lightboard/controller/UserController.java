@@ -23,11 +23,13 @@ public class UserController {
 
 	@GetMapping(params = "userId")
 	public Header<Boolean> isDuplicateUserId(@RequestParam(value = "userId") String userId) {
+//		return null;
 		return new Header<>(ResponseStatus.BOOLEAN_SUCCESS, userBO.isDuplicateUserId(userId));
 	}
 	
 	@GetMapping(value = "/admin/check")
 	public Header<Boolean> isExistAdminUser() {
+//		return null;
 		return new Header<>(ResponseStatus.BOOLEAN_SUCCESS, userBO.isExistAdminUser());
 	}
 	

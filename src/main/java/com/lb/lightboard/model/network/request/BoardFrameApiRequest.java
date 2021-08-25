@@ -1,5 +1,6 @@
 package com.lb.lightboard.model.network.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class BoardFrameApiRequest {
 
-    private long boardFrameId;
+    private Long boardFrameId;
 
     private String boardFrameName;
 
@@ -21,9 +22,13 @@ public class BoardFrameApiRequest {
 
     private String accessLevel;
 
+    @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+    private LocalDateTime createdAt;
+
     private Long createdUserNo;
 
-//    private LocalDateTime updatedAt;
+    @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+    private LocalDateTime updatedAt;
 
     private Long updatedUserNo;
 

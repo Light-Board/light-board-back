@@ -6,9 +6,7 @@ import com.lb.lightboard.model.network.Header;
 public interface CrudInterface<Req, Res> { // abstract 로 자동으로 만들어준대 ㅎㄷㄷ 따로 붙일 필요 없댕!
     Header<Res> create(Header<Req> request);
 
-    Header<Res> findById(Long id);
-
-    Header<Res> findAll();
+    Header<Res> read(Long id);
 
     Header<Res> update(Header<Req> request);
 

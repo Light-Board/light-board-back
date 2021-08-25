@@ -1,11 +1,11 @@
 package com.lb.lightboard.model.entity;
 
-import com.lb.lightboard.model.type.UserAuthorityType;
-import com.lb.lightboard.model.type.UserStatusType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,19 +17,26 @@ import java.time.LocalDateTime;
 public class BoardFrame {
 	@Id
 	@Column(name = "board_frame_id")
-	long boardFrameId;
+	Long boardFrameId;
+
 	@Column(name = "board_frame_name")
 	String boardFrameName;
+
 	@Column(name = "child_board_frame_id")
 	String childBoardFrameId;
+
 	@Column(name = "access_level")
 	String accessLevel;
+
 	@Column(name = "created_at")
 	LocalDateTime createdAt;
+
 	@Column(name = "created_user_no")
-	long createdUserNo;
+	Long createdUserNo;
+
 	@Column(name = "updated_at")
 	LocalDateTime updatedAt;
+
 	@Column(name = "updated_user_no")
-	long updatedUserNo;
+	Long updatedUserNo;
 }
