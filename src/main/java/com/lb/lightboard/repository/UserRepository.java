@@ -1,9 +1,3 @@
-/*
- * UseRepository.java version 2021. 06. 23
- *
- * Copyright 2021 NAVER Corp. All rights Reserved.
- * NAVER PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.lb.lightboard.repository;
 
 import com.lb.lightboard.model.type.UserStatusType;

@@ -1,12 +1,5 @@
-/*
- *  TestController.java version 2021. 05. 25
- *
- *  Copyright 2021 NAVER Corp. All rights Reserved.
- *  NAVER PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.lb.lightboard.controller;
 
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
