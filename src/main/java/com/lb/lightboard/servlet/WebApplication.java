@@ -29,6 +29,7 @@ public class WebApplication implements WebApplicationInitializer {
 		context.register(EnvironmentConfig.class);
 		context.register(WebConfig.class);
 		context.register(DBConfig.class);
+		context.register(JacksonSnakeCaseConfig.class);
 		context.register(SwaggerConfig.class);
 		context.register(SwaggerConfigurer.class);
 		servletContext.addListener(new ContextLoaderListener(context));

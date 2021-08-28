@@ -30,7 +30,7 @@ public class Header<T> {
 
     // 계속 계속 바뀌는 data부분 -> 제네릭을 사용하자!
     private T data;
-    
+
     // DATA INFO SETTING
     public Header(ResponseStatus responseStatus, T data) {
         this.transactionTime = LocalDateTime.now();
@@ -39,7 +39,7 @@ public class Header<T> {
         this.data = data;
     }
     
-    // DATA OK
+    // DATA OK [ creadted by 전세 ]
     public static <T> Header<T> OK() {
         return (Header<T>) Header.builder()
                 .transactionTime(LocalDateTime.now())

@@ -16,29 +16,18 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class BoardFrameBO implements CrudInterface<BoardFrameApiRequest, BoardFrameApiResponse> {
+public class BoardFrameBO extends BaseBO<BoardFrameApiRequest, BoardFrameApiResponse, BoardFrame> {
 
-	@Autowired
-	BoardFrameRepository boardFrameRepository;
-
-	public String findAllBoardFrames() {
-		List<BoardFrame> boardFrames = boardFrameRepository.findAll();
-		log.debug("boardFrames : {}", boardFrames);
-
-		// test line
-		StringBuilder sb = new StringBuilder();
-		for (BoardFrame resultBoardFrame:
-			 boardFrames) {
-			sb.append(resultBoardFrame);
-		}
-		return sb.toString();
-	}
+//	@Autowired
+//	BoardFrameRepository boardFrameRepository;
 
 	@Override
 	public Header<BoardFrameApiResponse> create(Header<BoardFrameApiRequest> request) {
 
 		// 1. request data 가져오기
 		BoardFrameApiRequest boardFrameApiRequest = request.getData();
+
+		log.info("{}", boardFrameApiRequest.toString());
 
 		// 2. boardFrame 생성 by client data
 		BoardFrame boardFrame = BoardFrame.builder()
@@ -52,14 +41,14 @@ public class BoardFrameBO implements CrudInterface<BoardFrameApiRequest, BoardFr
 				.updatedAt(LocalDateTime.now())
 				.build();
 
-		BoardFrame newBoardFrame = boardFrameRepository.save(boardFrame);
+		BoardFrame newBoardFrame = baseRepository.save(boardFrame);
 
 		// 3. 생성된 데이터 -> boardFrameResponse return
 		return response(newBoardFrame, "201", "Success: created one board-frame");
 	}
 
 	@Override
-	public Header<BoardFrameApiResponse> findById(Long id) {
+	public Header<BoardFrameApiResponse> read(Long id) {
 
 		/*
         // 1. id -> repository getOne or getById
@@ -72,16 +61,12 @@ public class BoardFrameBO implements CrudInterface<BoardFrameApiRequest, BoardFr
         */
 
 		// 위 코드를 람다식으로 더 편하게 바꿀 수 있다.
-		return boardFrameRepository.findById(id)
-				.map(boardFrame -> response(boardFrame, "200", "Success: get one board-frame row finding by id"))
+		return baseRepository.findById(id)
+				.map(boardFrame -> response(boardFrame))
+//				.map(boardFrame -> response(boardFrame, "200", "Success: get one board-frame row finding by id"))
 				.orElseGet(
 						() -> Header.ERROR("There is no any data")
 				);
-	}
-
-	@Override
-	public Header<BoardFrameApiResponse> findAll() {
-		return null;
 	}
 
 	@Override
@@ -92,6 +77,23 @@ public class BoardFrameBO implements CrudInterface<BoardFrameApiRequest, BoardFr
 	@Override
 	public Header<BoardFrameApiResponse> delete(Long id) {
 		return null;
+	}
+
+	private Header<BoardFrameApiResponse> response(BoardFrame boardFrame) {
+
+		// BoardFrame -> boardFrameApiResponse 만들어줘서 리턴하기
+		BoardFrameApiResponse resBody = BoardFrameApiResponse.builder()
+				.boardFrameId(boardFrame.getBoardFrameId())
+				.boardFrameName(boardFrame.getBoardFrameName())
+				.childBoardFrameId(boardFrame.getChildBoardFrameId())
+				.createdUserNo(boardFrame.getCreatedUserNo())
+				.createdAt(boardFrame.getCreatedAt())
+				.updatedUserNo(boardFrame.getUpdatedUserNo())
+				.updatedAt(boardFrame.getUpdatedAt())
+				.build();
+
+		// Header + data -> return
+		return Header.OK(resBody);
 	}
 
 	// return ApiResponse -> method response
