@@ -1,7 +1,7 @@
 package com.lb.lightboard.model.network;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.lb.lightboard.model.network.status.ResponseStatus;
+import com.lb.lightboard.model.network.status.ApiResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,20 +32,11 @@ public class Header<T> {
     private T data;
 
     // DATA INFO SETTING
-    public Header(ResponseStatus responseStatus, T data) {
+    public Header(T data, ApiResponseStatus apiResponseStatus, String dataType) {
         this.transactionTime = LocalDateTime.now();
-        this.resultCode = responseStatus.getResult();
-        this.description = responseStatus.getDescription();
+        this.resultCode = apiResponseStatus.getResult();
+        this.description = String.format(apiResponseStatus.getDescription(), dataType);
         this.data = data;
-    }
-    
-    // DATA OK [ creadted by 전세 ]
-    public static <T> Header<T> OK() {
-        return (Header<T>) Header.builder()
-                .transactionTime(LocalDateTime.now())
-                .resultCode("OK")
-                .description("OK")
-                .build();
     }
 
     // DATA OK
