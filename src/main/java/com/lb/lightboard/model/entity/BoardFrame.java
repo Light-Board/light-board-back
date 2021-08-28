@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class BoardFrame {
 	@Id
 	@Column(name = "board_frame_id")
-	Long boardFrameId;
+	long boardFrameId;
 
 	@Column(name = "board_frame_name")
 	String boardFrameName;

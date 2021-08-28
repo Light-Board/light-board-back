@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Component
+@RestController
 public abstract class CrudController<Req, Res, Entity> implements CrudInterface<Req, Res> {
 
     @Autowired(required = false)

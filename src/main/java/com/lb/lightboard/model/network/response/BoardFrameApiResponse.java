@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class BoardFrameApiResponse {
 
-    private Long boardFrameId;
+    private long boardFrameId;
 
     private String boardFrameName;
 
