@@ -1,18 +1,13 @@
 package com.lb.lightboard.bo;
 
-import com.lb.lightboard.controller.CrudInterface;
 import com.lb.lightboard.model.entity.BoardFrame;
 import com.lb.lightboard.model.network.Header;
 import com.lb.lightboard.model.network.request.BoardFrameApiRequest;
 import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
-import com.lb.lightboard.repository.BoardFrameRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service

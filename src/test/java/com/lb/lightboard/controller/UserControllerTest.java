@@ -1,5 +1,6 @@
 package com.lb.lightboard.controller;
 
+import com.lb.lightboard.controller.user.UserController;
 import com.lb.lightboard.model.network.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,13 +1,8 @@
-/*
- * User.java version 2021. 06. 23
- *
- * Copyright 2021 NAVER Corp. All rights Reserved.
- * NAVER PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- */
 package com.lb.lightboard.model.entity;
 
 import javax.persistence.*;
 
+import com.lb.lightboard.model.network.request.UserApiRequest;
 import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
 import com.lb.lightboard.model.type.converter.UserStatusTypeConverter;
@@ -50,4 +45,15 @@ public class User {
 	int reportedCnt;
 	@Column(name = "profile_user_no")
 	long profileUserNo;
+	
+	public User(UserApiRequest userApiRequest) {
+		this.userId = userApiRequest.getUserId();
+		this.password = userApiRequest.getPassword();
+		this.passwordSort = userApiRequest.getPasswordSort();
+		this.email = userApiRequest.getEmail();
+		this.userAuthorityType = userApiRequest.getUserAuthorityType();
+		this.userStatusType = userApiRequest.getUserStatusType();
+		this.reportedCnt = userApiRequest.getReportedCnt();
+		this.profileUserNo = userApiRequest.getProfileUserNo();
+	}
 }
