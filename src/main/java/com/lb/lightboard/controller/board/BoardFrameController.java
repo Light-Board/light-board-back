@@ -1,16 +1,12 @@
 package com.lb.lightboard.controller.board;
 
-import com.lb.lightboard.bo.BoardFrameBO;
 import com.lb.lightboard.controller.CrudController;
-import com.lb.lightboard.controller.CrudInterface;
 import com.lb.lightboard.model.entity.BoardFrame;
-import com.lb.lightboard.model.network.Header;
 import com.lb.lightboard.model.network.request.BoardFrameApiRequest;
 import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @RequestMapping(value = "/v1/api/board-frame", produces = MediaType.APPLICATION_JSON_VALUE)
