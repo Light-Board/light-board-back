@@ -2,12 +2,17 @@ package com.lb.lightboard.bo;
 
 import com.lb.lightboard.model.entity.BoardFrame;
 import com.lb.lightboard.model.network.Header;
+import com.lb.lightboard.model.network.Pagination;
 import com.lb.lightboard.model.network.request.BoardFrameApiRequest;
 import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -57,11 +62,33 @@ public class BoardFrameBO extends BaseBO<BoardFrameApiRequest, BoardFrameApiResp
 
 		// 위 코드를 람다식으로 더 편하게 바꿀 수 있다.
 		return baseRepository.findById(id)
-				.map(boardFrame -> response(boardFrame))
-//				.map(boardFrame -> response(boardFrame, "200", "Success: get one board-frame row finding by id"))
+//				.map(boardFrame -> response(boardFrame))
+				.map(boardFrame -> response(boardFrame, "200", "Success: get one board-frame row finding by id"))
 				.orElseGet(
 						() -> Header.ERROR("There is no any data")
 				);
+	}
+
+	@Override
+	public Header<List<BoardFrameApiResponse>> search(Pageable pageable) {
+		Page<BoardFrame> boardFrames = this.baseRepository.findAll(pageable);
+
+		List<BoardFrameApiResponse> boardFrameApiResponseList = boardFrames.stream()
+				.map(boardFrame -> response(boardFrame).getData())
+				.collect(Collectors.toList());
+
+		// pagination 부분 이용하기!
+		Pagination pagination = Pagination.builder()
+				.totalPages(boardFrames.getTotalPages())
+				.totalElements(boardFrames.getTotalElements())
+				.currentPage(boardFrames.getNumber())
+				.currentElements(boardFrames.getNumberOfElements())
+				.build();
+
+		return Header.OK(boardFrameApiResponseList, "200", "description", pagination);
+
+		// List<UserApiResponse> 로 이뤄져 있음 -> Header붙여줘야함!
+		// return Header.OK(userApiResponseList);
 	}
 
 	@Override

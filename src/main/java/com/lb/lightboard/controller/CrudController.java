@@ -4,8 +4,13 @@ import com.lb.lightboard.bo.BaseBO;
 import com.lb.lightboard.model.network.Header;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -22,9 +27,17 @@ public abstract class CrudController<Req, Res, Entity> implements CrudInterface<
         return baseBO.create(request);
     }
 
+    @Override
     @GetMapping("{id}")
     public Header<Res> read(@PathVariable Long id) {
         return baseBO.read(id);
+    }
+
+    @Override
+    @GetMapping("")
+    public Header<List<Res>> search(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 20) Pageable pageable) {
+        log.info("{}", pageable);
+        return baseBO.search(pageable);
     }
 
     @Override

@@ -31,6 +31,9 @@ public class Header<T> {
     // 계속 계속 바뀌는 data부분 -> 제네릭을 사용하자!
     private T data;
 
+    // for pagination!!
+    private Pagination pagination;
+
     // DATA INFO SETTING
     public Header(T data, ApiResponseStatus apiResponseStatus, String dataType) {
         this.transactionTime = LocalDateTime.now();
@@ -56,6 +59,17 @@ public class Header<T> {
                 .resultCode(resultCode)
                 .description(description)
                 .data(data)
+                .build();
+    }
+
+    // DATA OK with pagination!!
+    public static <T> Header<T> OK(T data, String resultCode, String description, Pagination pagination) {
+        return (Header<T>) Header.builder()
+                .transactionTime(LocalDateTime.now())
+                .resultCode("OK")
+                .description("OK")
+                .data(data)
+                .pagination(pagination)
                 .build();
     }
 
