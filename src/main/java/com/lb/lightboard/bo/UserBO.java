@@ -8,6 +8,7 @@ import com.lb.lightboard.model.network.status.ApiResponseStatus;
 import com.lb.lightboard.model.type.UserStatusType;
 import com.lb.lightboard.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,21 +32,26 @@ public class UserBO extends BaseBO<UserApiRequest, UserApiResponse, User> {
 	}
 
 	@Override
-	public Header<UserApiResponse> read(Long id) {
+	public Header<UserApiResponse> read(long id) {
 		User user = baseRepository.findById(id).orElse(null);
-		
+
 		log.info("[Read User] User : {}", user);
-		
+
 		return new Header<>(new UserApiResponse(user), ApiResponseStatus.READ_DATA, "User");
 	}
-	
+
+	@Override
+	public Header<List<UserApiResponse>> search(Pageable pageable) {
+		return null;
+	}
+
 	@Override
 	public Header<UserApiResponse> update(Header<UserApiRequest> request) {
 		return null;
 	}
-	
+
 	@Override
-	public Header<UserApiResponse> delete(Long id) {
+	public Header<UserApiResponse> delete(long id) {
 		return null;
 	}
 	

@@ -2,9 +2,12 @@ package com.lb.lightboard.bo;
 
 import com.lb.lightboard.model.entity.BoardFrame;
 import com.lb.lightboard.model.network.Header;
+import com.lb.lightboard.model.network.Pagination;
 import com.lb.lightboard.model.network.request.BoardFrameApiRequest;
 import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -73,6 +76,28 @@ public class BoardFrameBO extends BaseBO<BoardFrameApiRequest, BoardFrameApiResp
 			.collect(Collectors.toList());
 
 		return Header.OK(boardFrameApiResponseList, "200", "Success: get all board-frame");
+	}
+
+	@Override
+	public Header<List<BoardFrameApiResponse>> search(Pageable pageable) {
+		Page<BoardFrame> boardFrames = this.baseRepository.findAll(pageable);
+
+		List<BoardFrameApiResponse> boardFrameApiResponseList = boardFrames.stream()
+				.map(boardFrame -> responseBoardFrameApiResponse(boardFrame))
+				.collect(Collectors.toList());
+
+		// pagination 부분 이용하기!
+		Pagination pagination = Pagination.builder()
+				.totalPages(boardFrames.getTotalPages())
+				.totalElements(boardFrames.getTotalElements())
+				.currentPage(boardFrames.getNumber())
+				.currentElements(boardFrames.getNumberOfElements())
+				.build();
+
+		return Header.OK(boardFrameApiResponseList, "200", "description", pagination);
+
+		// List<UserApiResponse> 로 이뤄져 있음 -> Header붙여줘야함!
+		// return Header.OK(userApiResponseList);
 	}
 
 	@Override
