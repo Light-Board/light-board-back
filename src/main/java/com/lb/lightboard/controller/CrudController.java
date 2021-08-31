@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Component
-@RestController
 public abstract class CrudController<Req, Res, Entity> implements CrudInterface<Req, Res> {
 
     @Autowired(required = false)
@@ -22,8 +21,9 @@ public abstract class CrudController<Req, Res, Entity> implements CrudInterface<
         return baseBO.create(request);
     }
 
+    @Override
     @GetMapping("{id}")
-    public Header<Res> read(@PathVariable Long id) {
+    public Header<Res> read(@PathVariable long id) {
         return baseBO.read(id);
     }
 
@@ -35,7 +35,7 @@ public abstract class CrudController<Req, Res, Entity> implements CrudInterface<
 
     @Override
     @DeleteMapping("{id}")
-    public Header<Res> delete(@PathVariable Long id) {
+    public Header<Res> delete(@PathVariable long id) {
         return baseBO.delete(id);
     }
 }
