@@ -1,12 +1,17 @@
 package com.lb.lightboard.controller.board;
 
+import com.lb.lightboard.bo.BoardFrameBO;
 import com.lb.lightboard.controller.CrudController;
 import com.lb.lightboard.model.entity.BoardFrame;
+import com.lb.lightboard.model.network.Header;
 import com.lb.lightboard.model.network.request.BoardFrameApiRequest;
 import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
