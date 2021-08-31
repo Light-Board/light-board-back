@@ -19,7 +19,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 
 @Configuration
 @EnableJpaRepositories("com.lb.lightboard.repository")
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
 public class DBConfig {
 	@Value("${datasource.driver-class-name}")
 	String driverClassName;
