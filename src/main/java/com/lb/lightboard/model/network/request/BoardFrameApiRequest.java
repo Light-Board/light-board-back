@@ -25,11 +25,11 @@ public class BoardFrameApiRequest {
     @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime createdAt;
 
-    private Long createdUserNo;
+    private long createdUserNo;
 
     @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime updatedAt;
 
-    private Long updatedUserNo;
+    private long updatedUserNo;
 
 }
