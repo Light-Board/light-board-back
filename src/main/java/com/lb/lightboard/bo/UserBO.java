@@ -47,12 +47,27 @@ public class UserBO extends BaseBO<UserApiRequest, UserApiResponse, User> {
 
 	@Override
 	public Header<UserApiResponse> update(Header<UserApiRequest> request) {
-		return null;
+		UserApiRequest userApiRequest = request.getData();
+		
+		User user = baseRepository.findById(userApiRequest.getUserNo()).orElse(null);
+		if (user == null) {
+			return Header.ERROR("There is no any data for id");
+		}
+		
+		baseRepository.save(new User(userApiRequest));
+		log.info("[Update User] User : {}", user);
+		return new Header<>(new UserApiResponse(user), ApiResponseStatus.UPDATE_DATA, "User");
 	}
 
 	@Override
 	public Header<UserApiResponse> delete(long id) {
-		return null;
+		User user = baseRepository.findById(id).orElse(null);
+		
+		if (user == null) {
+			return Header.ERROR("There is no any data for id");
+		}
+		log.info("[Delete User] User : {}", user);
+		return new Header<>(new UserApiResponse(user), ApiResponseStatus.DELETE_DATA, "User");
 	}
 	
 	public Header<Boolean> isExistUserId(String userId) {

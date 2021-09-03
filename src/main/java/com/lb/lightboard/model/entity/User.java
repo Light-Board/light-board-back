@@ -7,12 +7,14 @@ import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
 import com.lb.lightboard.model.type.converter.UserStatusTypeConverter;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "user")
 public class User {
@@ -47,11 +49,16 @@ public class User {
 	long profileUserNo;
 	
 	public User(UserApiRequest userApiRequest) {
+		this.userNo = userApiRequest.getUserNo();
 		this.userId = userApiRequest.getUserId();
 		this.password = userApiRequest.getPassword();
 		this.passwordSort = userApiRequest.getPasswordSort();
 		this.email = userApiRequest.getEmail();
 		this.userAuthorityType = userApiRequest.getUserAuthorityType();
+		this.createAt = userApiRequest.getCreateAt();
+		this.updateAt = userApiRequest.getUpdateAt();
+		this.updatedUserNo = userApiRequest.getUpdatedUserNo();
+		this.updatedDetail = userApiRequest.getUpdatedDetail();
 		this.userStatusType = userApiRequest.getUserStatusType();
 		this.reportedCnt = userApiRequest.getReportedCnt();
 		this.profileUserNo = userApiRequest.getProfileUserNo();
