@@ -2,6 +2,7 @@ package com.lb.lightboard.model.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lb.lightboard.model.network.request.UserApiRequest;
 import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
@@ -10,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +24,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_no")
-	long userNo;
+	Long userNo;
 	@Column(name = "user_id")
 	String userId;
 	@Column(name = "password")
@@ -33,11 +36,13 @@ public class User {
 	@Column(name = "authority")
 	UserAuthorityType userAuthorityType;
 	@Column(name = "created_at")
-	long createAt;
+	@JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+	LocalDateTime createAt;
 	@Column(name = "updated_at")
-	long updateAt;
+	@JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+	LocalDateTime updateAt;
 	@Column(name = "updated_user_no")
-	long updatedUserNo;
+	Long updatedUserNo;
 	@Column(name = "updated_detail")
 	String updatedDetail;
 	@Convert(converter = UserStatusTypeConverter.class)
@@ -46,7 +51,7 @@ public class User {
 	@Column(name = "reported_cnt")
 	int reportedCnt;
 	@Column(name = "profile_user_no")
-	long profileUserNo;
+	Long profileUserNo;
 	
 	public User(UserApiRequest userApiRequest) {
 		this.userNo = userApiRequest.getUserNo();
