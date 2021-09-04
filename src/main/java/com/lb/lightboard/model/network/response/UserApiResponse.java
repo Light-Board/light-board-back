@@ -1,21 +1,26 @@
 package com.lb.lightboard.model.network.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lb.lightboard.model.entity.User;
 import com.lb.lightboard.model.type.UserAuthorityType;
 import com.lb.lightboard.model.type.UserStatusType;
 
+import java.time.LocalDateTime;
+
 public class UserApiResponse {
-	long userNo;
+	Long userNo;
 	String userId;
 	String email;
 	UserAuthorityType userAuthorityType;
-	long createAt;
-	long updateAt;
-	long updatedUserNo;
+	@JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+	LocalDateTime createAt;
+	@JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+	LocalDateTime updateAt;
+	Long updatedUserNo;
 	String updateDetail;
 	UserStatusType userStatusType;
 	int reportedCnt;
-	long profileUserNo;
+	Long profileUserNo;
 
 	public UserApiResponse(User user) {
 		this.userNo = user.getUserNo();
