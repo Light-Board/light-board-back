@@ -1,6 +1,7 @@
 package com.lb.lightboard.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.lb.lightboard.model.network.request.ConfigurationApiRequest;
 import com.lb.lightboard.model.type.ServiceStatusType;
 import com.lb.lightboard.model.type.converter.ServiceStatusTypeConverter;
 import lombok.AllArgsConstructor;
@@ -38,4 +39,13 @@ public class Configuration {
 	
 	@Column(name = "updated_user_no")
 	Long updatedUserNo;
+	
+	public Configuration(ConfigurationApiRequest configurationApiRequest) {
+		this.configurationId = configurationApiRequest.getConfigurationId();
+		this.serviceStatusType = configurationApiRequest.getServiceStatusType();
+		this.serviceName = configurationApiRequest.getServiceName();
+		this.fabicon = configurationApiRequest.getFabicon();
+		this.updatedAt = configurationApiRequest.getUpdatedAt();
+		this.updatedUserNo = configurationApiRequest.getUpdatedUserNo();
+	}
 }
