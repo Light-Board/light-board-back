@@ -34,7 +34,7 @@ public abstract class CrudController<Req, Res, Entity> implements CrudInterface<
 
     @Override
     @GetMapping("")
-    public Header<List<Res>> search(@PageableDefault(sort = "id", direction = Sort.Direction.ASC, size = 20) Pageable pageable) {
+    public Header<List<Res>> search(@PageableDefault(size = 20) Pageable pageable) {
         log.info("{}", pageable);
         return baseBO.search(pageable);
     }

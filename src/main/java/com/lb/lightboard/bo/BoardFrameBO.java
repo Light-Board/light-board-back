@@ -80,6 +80,7 @@ public class BoardFrameBO extends BaseBO<BoardFrameApiRequest, BoardFrameApiResp
 
 	@Override
 	public Header<List<BoardFrameApiResponse>> search(Pageable pageable) {
+
 		Page<BoardFrame> boardFrames = this.baseRepository.findAll(pageable);
 
 		List<BoardFrameApiResponse> boardFrameApiResponseList = boardFrames.stream()

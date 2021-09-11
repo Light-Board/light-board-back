@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class BoardFrame {
 	@Id
 	@Column(name = "board_frame_id")
-	long boardFrameId;
+	Long boardFrameId;
 
 	@Column(name = "board_frame_name")
 	String boardFrameName;
@@ -36,12 +36,12 @@ public class BoardFrame {
 	LocalDateTime createdAt;
 
 	@Column(name = "created_user_no")
-	long createdUserNo;
+	Long createdUserNo;
 
 	@Column(name = "updated_at")
 	@JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
 	LocalDateTime updatedAt;
 
 	@Column(name = "updated_user_no")
-	long updatedUserNo;
+	Long updatedUserNo;
 }
