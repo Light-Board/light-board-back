@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/v1/api/admin/user", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/v1/api/user", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 	@Autowired
 	UserBO userBO;
