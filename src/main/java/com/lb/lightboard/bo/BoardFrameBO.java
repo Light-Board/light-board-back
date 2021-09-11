@@ -80,11 +80,15 @@ public class BoardFrameBO extends BaseBO<BoardFrameApiRequest, BoardFrameApiResp
 
 	@Override
 	public Header<List<BoardFrameApiResponse>> search(Pageable pageable) {
+
+		log.info("{}", pageable);
 		Page<BoardFrame> boardFrames = this.baseRepository.findAll(pageable);
+		log.info("{}", boardFrames);
 
 		List<BoardFrameApiResponse> boardFrameApiResponseList = boardFrames.stream()
 				.map(boardFrame -> responseBoardFrameApiResponse(boardFrame))
 				.collect(Collectors.toList());
+		log.info("{}", boardFrameApiResponseList);
 
 		// pagination 부분 이용하기!
 		Pagination pagination = Pagination.builder()

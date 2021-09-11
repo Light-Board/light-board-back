@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class BoardFrameApiResponse {
 
-    private long boardFrameId;
+    private Long boardFrameId;
 
     private String boardFrameName;
 
@@ -25,11 +25,11 @@ public class BoardFrameApiResponse {
     @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime createdAt;
 
-    private long createdUserNo;
+    private Long createdUserNo;
 
     @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime updatedAt;
 
-    private long updatedUserNo;
+    private Long updatedUserNo;
 
 }

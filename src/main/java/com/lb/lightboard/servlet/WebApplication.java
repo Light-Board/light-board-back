@@ -6,13 +6,18 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import com.lb.lightboard.config.*;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 @Slf4j
 public class WebApplication implements WebApplicationInitializer {
