@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @Getter
 public enum ApiResponseStatus {
 	// SUCCESS
-	CREATE_DATA("200", "[Create] %s data"),
+	CREATE_DATA("201", "[Create] %s data"),
 	READ_DATA("200", "[Read] %s data"),
-	UPDATE_DATA("200", "[Update] %s data"),
-	DELETE_DATA("200", "[DELETE] %s data"),
+	SEARCH_DATA("200", "[Search] %s data"),
+	UPDATE_DATA("201", "[Update] %s data"),
+	DELETE_DATA("201", "[DELETE] %s data"),
 	
 	// ERROR
 	CREATE_FAIL("400", "[Create Fail] %s data");
