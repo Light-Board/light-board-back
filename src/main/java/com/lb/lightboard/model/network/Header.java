@@ -18,7 +18,6 @@ public class Header<T> {
     // api 통신 시간
     // json으로 리턴해줄때 명칭을 바꿔줄 수 있다 -> 카멜케이스와 스네이크 표현의 차이점
     // 이렇게 하루종일 다 바꿔주면 시간 날려 먹고 아까워 죽는다 -> resources -> application.properties에서 설정 쌉가능이다 이말이야
-    // @JsonProperty("transaction_time")
     @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime transactionTime; // ISO
 
@@ -66,8 +65,8 @@ public class Header<T> {
     public static <T> Header<T> OK(T data, String resultCode, String description, Pagination pagination) {
         return (Header<T>) Header.builder()
                 .transactionTime(LocalDateTime.now())
-                .resultCode("OK")
-                .description("OK")
+                .resultCode(resultCode)
+                .description(description)
                 .data(data)
                 .pagination(pagination)
                 .build();

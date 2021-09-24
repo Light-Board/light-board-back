@@ -1,17 +1,22 @@
 package com.lb.lightboard.bo;
 
 import com.lb.lightboard.model.entity.Board;
+import com.lb.lightboard.model.entity.BoardFrame;
 import com.lb.lightboard.model.network.Header;
+import com.lb.lightboard.model.network.Pagination;
 import com.lb.lightboard.model.network.request.BoardApiRequest;
 import com.lb.lightboard.model.network.response.BoardApiResponse;
+import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
 import com.lb.lightboard.model.network.status.ApiResponseStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -37,13 +42,33 @@ public class BoardBO extends BaseBO<BoardApiRequest, BoardApiResponse, Board> {
 			log.info("[Update Board] Board : {}", board);
 			return board;
 		})
-				.map(board -> new Header<>(new BoardApiResponse(board), ApiResponseStatus.UPDATE_DATA, "Board"))
+				.map(board -> new Header<>(new BoardApiResponse(board), ApiResponseStatus.READ_DATA, "Board"))
 				.orElseGet(() -> Header.ERROR("There is no any data for id"));
 	}
 	
 	@Override
 	public Header<List<BoardApiResponse>> search(Pageable pageable) {
-		return null;
+
+		Page<Board> board = this.baseRepository.findAll(pageable);
+
+		List<BoardApiResponse> boardApiResponseList = board.stream()
+				.map(boardResponse -> new BoardApiResponse(boardResponse))
+				.collect(Collectors.toList());
+
+		// pagination 부분 이용
+		Pagination pagination = Pagination.builder()
+				.totalPages(board.getTotalPages())
+				.totalElements(board.getTotalElements())
+				.currentPage(board.getNumber())
+				.currentElements(board.getNumberOfElements())
+				.build();
+
+		// return header setting
+		Header<List<BoardApiResponse>> returnHeader = new Header<>(boardApiResponseList, ApiResponseStatus.SEARCH_DATA, "Board");
+		returnHeader.setPagination(pagination);
+
+		return returnHeader;
+
 	}
 
 	@Override
