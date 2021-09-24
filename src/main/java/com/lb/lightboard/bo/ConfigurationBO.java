@@ -22,9 +22,11 @@ public class ConfigurationBO extends BaseBO<ConfigurationApiRequest, Configurati
 	@Override
 	public Header<ConfigurationApiResponse> read(long id) {
 		Configuration configuration = baseRepository.findById(id).orElse(null);
+		if (configuration == null) {
+			return Header.ERROR("There is no any data for id");
+		}
 		
 		log.info("[Read Configuration] Configuration : {}", configuration);
-		
 		return new Header<>(new ConfigurationApiResponse(configuration), ApiResponseStatus.READ_DATA, "Configuration");
 	}
 	
