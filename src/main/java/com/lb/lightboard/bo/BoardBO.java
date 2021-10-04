@@ -1,12 +1,10 @@
 package com.lb.lightboard.bo;
 
 import com.lb.lightboard.model.entity.Board;
-import com.lb.lightboard.model.entity.BoardFrame;
 import com.lb.lightboard.model.network.Header;
 import com.lb.lightboard.model.network.Pagination;
 import com.lb.lightboard.model.network.request.BoardApiRequest;
 import com.lb.lightboard.model.network.response.BoardApiResponse;
-import com.lb.lightboard.model.network.response.BoardFrameApiResponse;
 import com.lb.lightboard.model.network.status.ApiResponseStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -49,19 +47,14 @@ public class BoardBO extends BaseBO<BoardApiRequest, BoardApiResponse, Board> {
 	@Override
 	public Header<List<BoardApiResponse>> search(Pageable pageable) {
 
-		Page<Board> board = this.baseRepository.findAll(pageable);
+		Page<Board> boards = this.baseRepository.findAll(pageable);
 
-		List<BoardApiResponse> boardApiResponseList = board.stream()
+		List<BoardApiResponse> boardApiResponseList = boards.stream()
 				.map(boardResponse -> new BoardApiResponse(boardResponse))
 				.collect(Collectors.toList());
 
 		// pagination 부분 이용
-		Pagination pagination = Pagination.builder()
-				.totalPages(board.getTotalPages())
-				.totalElements(board.getTotalElements())
-				.currentPage(board.getNumber())
-				.currentElements(board.getNumberOfElements())
-				.build();
+		Pagination pagination = new Pagination(boards);
 
 		// return header setting
 		Header<List<BoardApiResponse>> returnHeader = new Header<>(boardApiResponseList, ApiResponseStatus.SEARCH_DATA, "Board");

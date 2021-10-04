@@ -5,8 +5,12 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lb.lightboard.model.network.request.UserApiRequest;
 import com.lb.lightboard.model.type.UserAuthorityType;
+import com.lb.lightboard.model.type.UserQuestionType;
 import com.lb.lightboard.model.type.UserStatusType;
+import com.lb.lightboard.model.type.converter.UserAuthorityTypeConverter;
+import com.lb.lightboard.model.type.converter.UserQuestionTypeConverter;
 import com.lb.lightboard.model.type.converter.UserStatusTypeConverter;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +37,7 @@ public class User {
 	String passwordSort;
 	@Column(name = "email")
 	String email;
+	@Convert(converter = UserAuthorityTypeConverter.class)
 	@Column(name = "authority")
 	UserAuthorityType userAuthorityType;
 	@Column(name = "created_at")
@@ -50,9 +55,18 @@ public class User {
 	UserStatusType userStatusType;
 	@Column(name = "reported_cnt")
 	int reportedCnt;
-	@Column(name = "profile_user_no")
-	Long profileUserNo;
-	
+	@Column(name = "user_name")
+	String userName;
+	@Column(name = "image_url")
+	String imageUrl;
+	@Column(name = "user_interest")
+	String userInterest;
+	@Column(name = "question_answer")
+	String questionAnswer;
+	@Convert(converter = UserQuestionTypeConverter.class)
+	@Column(name = "question_type")
+	UserQuestionType userQuestionType;
+
 	public User(UserApiRequest userApiRequest) {
 		this.userNo = userApiRequest.getUserNo();
 		this.userId = userApiRequest.getUserId();
@@ -66,6 +80,10 @@ public class User {
 		this.updatedDetail = userApiRequest.getUpdatedDetail();
 		this.userStatusType = userApiRequest.getUserStatusType();
 		this.reportedCnt = userApiRequest.getReportedCnt();
-		this.profileUserNo = userApiRequest.getProfileUserNo();
+		this.userName = userApiRequest.getUserName();
+		this.imageUrl = userApiRequest.getImageUrl();
+		this.userInterest = userApiRequest.getUserInterest();
+		this.questionAnswer = userApiRequest.getQuestionAnswer();
+		this.userQuestionType = userApiRequest.getUserQuestionType();
 	}
 }
