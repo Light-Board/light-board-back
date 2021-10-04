@@ -27,7 +27,7 @@ public class UserBO {
 	}
 	
 	public Header<Boolean> isExistAdminUser() {
-		List<User> adminUsers = userRepository.findByUserStatusType(UserStatusType.ADMIN);
+		List<User> adminUsers = ((UserRepository)baseRepository).findByUserAuthorityType(UserAuthorityType.ADMIN);
 		boolean result = !adminUsers.isEmpty();
 		
 		log.debug("[Check Exist Admin User] Is Exist Admin User : {}", result);
