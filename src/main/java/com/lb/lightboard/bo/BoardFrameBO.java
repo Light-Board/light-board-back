@@ -88,12 +88,7 @@ public class BoardFrameBO extends BaseBO<BoardFrameApiRequest, BoardFrameApiResp
 				.collect(Collectors.toList());
 
 		// pagination 부분 이용하기!
-		Pagination pagination = Pagination.builder()
-				.totalPages(boardFrames.getTotalPages())
-				.totalElements(boardFrames.getTotalElements())
-				.currentPage(boardFrames.getNumber())
-				.currentElements(boardFrames.getNumberOfElements())
-				.build();
+		Pagination pagination = new Pagination(boardFrames);
 
 		return Header.OK(boardFrameApiResponseList, "200", "description", pagination);
 
