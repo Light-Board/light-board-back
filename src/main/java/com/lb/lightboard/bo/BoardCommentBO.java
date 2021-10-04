@@ -54,12 +54,7 @@ public class BoardCommentBO extends BaseBO<BoardCommentApiRequest, BoardCommentA
 				.collect(Collectors.toList());
 
 		// pagination 부분 이용
-		Pagination pagination = Pagination.builder()
-				.totalPages(boardComments.getTotalPages())
-				.totalElements(boardComments.getTotalElements())
-				.currentPage(boardComments.getNumber())
-				.currentElements(boardComments.getNumberOfElements())
-				.build();
+		Pagination pagination = new Pagination(boardComments);
 
 		// return header setting
 		Header<List<BoardCommentApiResponse>> returnHeader = new Header<>(boardCommentApiResponseList, ApiResponseStatus.SEARCH_DATA, "BoardComment");
