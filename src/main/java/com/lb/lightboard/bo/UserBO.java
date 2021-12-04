@@ -1,6 +1,8 @@
 package com.lb.lightboard.bo;
 
+import com.lb.lightboard.exception.UserNotFoundException;
 import com.lb.lightboard.model.entity.User;
+import com.lb.lightboard.model.entity.UserDetailsVO;
 import com.lb.lightboard.model.network.Header;
 import com.lb.lightboard.model.network.Pagination;
 import com.lb.lightboard.model.network.request.UserApiRequest;
@@ -15,15 +17,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-public class UserBO extends BaseBO<UserApiRequest, UserApiResponse, User> {
+public class UserBO extends BaseBO<UserApiRequest, UserApiResponse, User> implements UserDetailsService {
 	@Autowired
 	UserQuestionRepository userQuestionRepository;
 
@@ -108,5 +115,17 @@ public class UserBO extends BaseBO<UserApiRequest, UserApiResponse, User> {
 		log.debug("[Check Exist Admin User] Is Exist Admin User : {}", result);
 
 		return new Header<>(result, ApiResponseStatus.READ_DATA, "Exist Admin User");
+	}
+
+	@Override
+	public UserDetailsVO loadUserByUsername(String userId) {
+		List<User> users = ((UserRepository)baseRepository).findByUserId(userId);
+
+		if (users.size() != 1) {
+			throw new UserNotFoundException(userId);
+		}
+
+		return new UserDetailsVO(users.get(0),
+			Collections.singleton(new SimpleGrantedAuthority(users.get(0).getUserAuthorityType().toString())));
 	}
 }
