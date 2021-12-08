@@ -26,4 +26,8 @@ public enum UserStatusType {
 	public static UserStatusType find(String dbCode) {
 		return MapUtils.getObject(DB_CODES, dbCode, null);
 	}
+
+	public boolean isActivate() {
+		return this == ACTIVATE;
+	}
 }
