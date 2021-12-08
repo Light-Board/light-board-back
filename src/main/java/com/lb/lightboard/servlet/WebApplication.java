@@ -30,16 +30,16 @@ public class WebApplication implements WebApplicationInitializer {
 		context.register(JacksonSnakeCaseConfig.class);
 		context.register(SwaggerConfig.class);
 		context.register(SwaggerConfigurer.class);
-		context.register(SecurityConfig.class);
+		// context.register(SecurityConfig.class);
 		servletContext.addListener(new ContextLoaderListener(context));
 
 		// Servlet 설정
 		setServletDispatcherContext(context, servletContext);
 
 		// Filter 설정
-		FilterRegistration securityFilter = servletContext.addFilter("springSecurityFilterChain",
-			DelegatingFilterProxy.class);
-		securityFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
+		// FilterRegistration securityFilter = servletContext.addFilter("springSecurityFilterChain",
+		// 	DelegatingFilterProxy.class);
+		// securityFilter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD), true, "/*");
 		setCharacterEncodingFilter(servletContext);
 	}
 
