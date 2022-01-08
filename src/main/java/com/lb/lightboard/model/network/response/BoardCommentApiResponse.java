@@ -22,6 +22,8 @@ public class BoardCommentApiResponse {
 
     private String comment;
 
+    private Long thumbsCnt;
+
     @JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
     private LocalDateTime createdAt;
 
@@ -36,6 +38,7 @@ public class BoardCommentApiResponse {
         this.boardCommentId = boardComment.getBoardCommentId();
         this.boardId = boardComment.getBoardId();
         this.comment = boardComment.getComment();
+        this.thumbsCnt = boardComment.getThumbsCnt();
         this.createdAt = boardComment.getCreatedAt();
         this.createdUserNo = boardComment.getCreatedUserNo();
         this.updatedAt = boardComment.getUpdatedAt();

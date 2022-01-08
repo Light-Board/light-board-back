@@ -31,6 +31,9 @@ public class BoardComment {
 	@Column(name = "comment")
 	String comment;
 
+	@Column(name = "thumbs_cnt")
+	Long thumbsCnt;
+
 	@Column(name = "created_at")
 	@JsonFormat(pattern = "yyyy-MM-dd kk:mm:ss")
 	LocalDateTime createdAt;
